@@ -81,6 +81,7 @@ public class SecurityAuditListenerConfig implements PreInsertEventListener,
     private void loadInsertAuditFields(AbstractBaseAuditable audit) {
         audit.setCreatedByUser(this.keycloakUserInfo.getUserId());
         audit.setCreatedFromIp(this.keycloakUserInfo.getIp());
+        audit.setCompanyCode(this.keycloakUserInfo.getCompanyCode());
         audit.setCreateDate(DateUtil.currentDate());
     }
 
@@ -91,6 +92,7 @@ public class SecurityAuditListenerConfig implements PreInsertEventListener,
      */
     private void loadUpdateAuditFields(AbstractBaseAuditable audit) {
         audit.setLastModifiedByUser(this.keycloakUserInfo.getUserId());
+        audit.setCompanyCode(this.keycloakUserInfo.getCompanyCode());
         audit.setUpdatedFromIp(this.keycloakUserInfo.getIp());
         audit.setLastModifiedDate(DateUtil.currentDate());
     }

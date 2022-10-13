@@ -35,7 +35,8 @@ public class KeycloakUserInfo implements IKeycloakUserInfo {
      */
     @Override
     public Integer getCompanyCode() {
-        return 1;
+        Integer companyCode = AuthSecurityUtil.getUserLogin().getCompanyCode();
+        return null == companyCode ? 1 : companyCode;
     }
 
     /**
@@ -59,6 +60,6 @@ public class KeycloakUserInfo implements IKeycloakUserInfo {
         } catch (Exception e) {
             ipAddress = "ND";
         }
-        return StringUtils.isNotBlank(ipAddress) ? ipAddress : "ND";
+        return StringUtils.isBlank(ipAddress) ? "ND" : ipAddress;
     }
 }
