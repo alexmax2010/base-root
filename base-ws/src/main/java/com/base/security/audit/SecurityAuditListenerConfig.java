@@ -1,11 +1,11 @@
 package com.base.security.audit;
 
-import java.util.Date;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import com.base.common.AbstractBaseAuditable;
+import com.base.util.DateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.event.service.spi.EventListenerRegistry;
 import org.hibernate.event.spi.EventType;
@@ -81,7 +81,7 @@ public class SecurityAuditListenerConfig implements PreInsertEventListener,
     private void loadInsertAuditFields(AbstractBaseAuditable audit) {
         audit.setCreatedByUser(this.keycloakUserInfo.getUserId());
         audit.setCreatedFromIp(this.keycloakUserInfo.getIp());
-        audit.setCreateDate(new Date());
+        audit.setCreateDate(DateUtil.currentDate());
     }
 
     /**
@@ -91,6 +91,7 @@ public class SecurityAuditListenerConfig implements PreInsertEventListener,
      */
     private void loadUpdateAuditFields(AbstractBaseAuditable audit) {
         audit.setLastModifiedByUser(this.keycloakUserInfo.getUserId());
-        audit.setLastModifiedDate(new Date());
+        audit.setUpdatedFromIp(this.keycloakUserInfo.getIp());
+        audit.setLastModifiedDate(DateUtil.currentDate());
     }
 }

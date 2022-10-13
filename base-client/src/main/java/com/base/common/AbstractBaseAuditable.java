@@ -42,6 +42,9 @@ public abstract class AbstractBaseAuditable<PK extends Serializable> {
     @Column(name = "STATUS")
     protected String status = "1";
 
+    @Column(name = "COMPANY_CODE")
+    protected Integer companyCode;
+
     /**
      * User who created the record.
      */
@@ -78,6 +81,12 @@ public abstract class AbstractBaseAuditable<PK extends Serializable> {
      */
     @Column(name = "CREATED_FROM_IP")
     protected String createdFromIp;
+
+    /**
+     * Updated from ip.
+     */
+    @Column(name = "UPDATED_FROM_IP")
+    protected String updatedFromIp;
 
     @Version
     @Column(name = "VERSION")

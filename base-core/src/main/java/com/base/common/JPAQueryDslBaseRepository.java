@@ -2,6 +2,7 @@ package com.base.common;
 
 import java.util.Date;
 import com.base.security.audit.IKeycloakUserInfo;
+import com.base.util.DateUtil;
 import com.querydsl.core.dml.UpdateClause;
 import com.querydsl.core.types.EntityPath;
 import com.querydsl.core.types.Path;
@@ -22,8 +23,8 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
  * @author components on 2022/09/26
  * @version 1.0
  */
-public abstract class JPAQueryDslBaseRepository<T> extends QuerydslRepositorySupport
-    implements IQueryDslBaseRepository<T> {
+public abstract class JPAQueryDslBaseRepository<T> extends QuerydslRepositorySupport implements
+    IQueryDslBaseRepository<T> {
 
     @Lazy
     @Autowired
@@ -67,7 +68,7 @@ public abstract class JPAQueryDslBaseRepository<T> extends QuerydslRepositorySup
             keycloakUserInfo.getUserId());
         update.set(Expressions.path(Date.class,
                 getNameFromPath(QAbstractBaseAuditable.abstractBaseAuditable.lastModifiedDate)),
-            new Date());
+            DateUtil.currentDate());
         return update;
     }
 

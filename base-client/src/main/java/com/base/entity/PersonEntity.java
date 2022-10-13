@@ -46,9 +46,6 @@ public class PersonEntity extends AbstractBaseAuditable<String> {
     @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "COMPANY_CODE")
-    protected Integer companyCode;
-
     /**
      * Get entity id.
      */
