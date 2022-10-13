@@ -38,7 +38,6 @@ public class PersonService extends BaseService<PersonEntity, IPersonRepository> 
     @Transactional
     public void save(PersonVo personVo) {
         PersonEntity personEntity = ProjectUtil.convert(personVo, PersonEntity.class);
-        personEntity.setCompanyCode(1);
         this.repository.save(personEntity);
         personVo.setPersonId(personEntity.getId());
     }
