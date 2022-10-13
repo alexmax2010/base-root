@@ -4,7 +4,7 @@ logging:
       springframework:
         web: INFO
       hibernate: ERROR
-
+---
 server:
   port: 8080
   servlet:
@@ -13,23 +13,33 @@ server:
 keycloak:
   enabled: true
   bearer-only: true
-  auth-server-url: http://localhost:8083/auth
-  resource: BASE-WEB
-  realm: BASE-SSO-INTRANET
+  auth-server-url: http://localhost:8080/auth
+  resource: BASE-WS
+  realm: CFAVORITA-SSO-INTRANET
   public-client: true
   principal-attribute: preferred_username
-  #credentials:
-  #secret: ce515f8d-dbf7-438e-a8ef-71cc8d4c6f69
+  # credentials:
+  # secret: LwmDMmjJDesuahnvhufqPxaDjOp3n7vU
   use-resource-role-mappings: false
   allowAnyHostname: true
   ssl-required: external
 ---
 spring:
   datasource:
-    jndi-name: jdbc/base
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/pruebas
+    username: postgres
+    password: ADMIN
+    hikari:
+      connectionTimeout: 60000
+      idleTimeout: 600000
+      maxLifetime: 1800000
+      maximumPoolSize: 20
+      connectionTestQuery: SELECT 1
 
   jpa:
-    show-sql: false
+    show-sql: true
     hibernate:
       ddl-auto: none
       naming:
@@ -37,6 +47,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
 #        dialect: org.hibernate.dialect.MariaDB103Dialect
 
 springdoc:
