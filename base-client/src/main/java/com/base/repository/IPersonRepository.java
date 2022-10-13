@@ -29,4 +29,12 @@ public interface IPersonRepository extends IQueryDslBaseRepository<PersonEntity>
      */
     List<PersonVo> list();
 
+
+    /**
+     * Update Person.
+     *
+     * @param personVo person Object
+     * @return PersonVo updated in DB
+     */
+    PersonVo updateValues(PersonVo personVo);
 }

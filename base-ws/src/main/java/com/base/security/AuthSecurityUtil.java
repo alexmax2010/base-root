@@ -40,7 +40,7 @@ public final class AuthSecurityUtil {
         if (principal instanceof KeycloakPrincipal) {
             KeycloakPrincipal kPrincipal = (KeycloakPrincipal) principal;
             AccessToken accessToken = kPrincipal.getKeycloakSecurityContext().getToken();
-            return UserVo.builder().id(accessToken.getId()).firstName(accessToken.getGivenName())
+            return UserVo.builder().userId(accessToken.getId()).id(accessToken.getId()).firstName(accessToken.getGivenName())
                 .lastName(accessToken.getFamilyName()).email(accessToken.getEmail()).build();
         }
         return null;

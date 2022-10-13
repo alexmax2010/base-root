@@ -1,5 +1,7 @@
 package com.base.security;
 
+import com.base.security.audit.IKeycloakUserInfo;
+import com.base.security.audit.KeycloakUserInfo;
 import org.keycloak.adapters.KeycloakConfigResolver;
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
@@ -27,13 +29,15 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
 public class KeyCloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
+
     /**
      * {@inheritDoc}
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
-        http.authorizeRequests().antMatchers("/swagger-ui/**", "/openapi/**").permitAll().anyRequest().authenticated();
+        http.authorizeRequests().antMatchers("/swagger-ui/**", "/openapi/**").permitAll()
+            .anyRequest().authenticated();
         http.csrf().disable();
         http.cors();
     }
@@ -41,9 +45,9 @@ public class KeyCloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     /**
      * Configuracion global de KeycloakAuthenticationProvider.
      *
-     * @author components on 2022/09/26
      * @param auth AuthenticationManagerBuilder
      * @throws Exception error
+     * @author components on 2022/09/26
      */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -64,11 +68,21 @@ public class KeyCloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     /**
      * KeycloakConfigResolver.
      *
-     * @author components on 2022/09/26
      * @return KeycloakConfigResolver
+     * @author components on 2022/09/26
      */
     @Bean
     public KeycloakConfigResolver keycloakConfigResolver() {
         return new KeycloakSpringBootConfigResolver();
+    }
+
+    /**
+     * Keycloak user info.
+     *
+     * @return IKeycloakUserInfo
+     */
+    @Bean
+    public IKeycloakUserInfo keycloakUserInfo() {
+        return new KeycloakUserInfo();
     }
 }

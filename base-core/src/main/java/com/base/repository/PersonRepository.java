@@ -6,6 +6,7 @@ import java.util.List;
 import com.base.common.JPAQueryDslBaseRepository;
 import com.base.entity.PersonEntity;
 import com.base.vo.PersonVo;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.JPQLQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Lazy;
@@ -56,4 +57,20 @@ public class PersonRepository extends JPAQueryDslBaseRepository<PersonEntity> im
                 personEntity.createDate,
                 personEntity.status)).fetch();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PersonVo updateValues(PersonVo personVo) {
+        BooleanBuilder where = new BooleanBuilder();
+        where.and(personEntity.personId.eq(personVo.getPersonId()));
+        updateWithAudit(personEntity).where(where)
+            .set(personEntity.firstName, personVo.getFirstName())
+            .set(personEntity.lastName, personVo.getLastName())
+            .set(personEntity.email, personVo.getEmail()).execute();
+        return personVo;
+    }
+
+
 }

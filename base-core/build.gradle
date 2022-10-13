@@ -17,6 +17,11 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3'
     implementation 'commons-io:commons-io'
 
+
+    implementation group: 'org.hibernate', name: 'hibernate-core'
+    implementation group: 'org.hibernate', name: 'hibernate-entitymanager'
+
+
     // Test
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'

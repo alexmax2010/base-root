@@ -9,6 +9,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
@@ -37,8 +38,9 @@ public abstract class AbstractBaseAuditable<PK extends Serializable> {
     /**
      * True if the record is active otherwise false.
      */
+    @Builder.Default
     @Column(name = "STATUS")
-    protected String status;
+    protected String status = "1";
 
     /**
      * User who created the record.

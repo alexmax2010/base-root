@@ -1,6 +1,5 @@
 package com.base.service;
 
-import java.util.Date;
 import java.util.List;
 import com.base.common.BaseService;
 import com.base.entity.PersonEntity;
@@ -38,11 +37,11 @@ public class PersonService extends BaseService<PersonEntity, IPersonRepository> 
     @Override
     @Transactional
     public void save(PersonVo personVo) {
+        this.repository.updateValues(personVo);
+
+
         PersonEntity personEntity = ProjectUtil.convert(personVo, PersonEntity.class);
         personEntity.setCompanyCode(1);
-        personEntity.setStatus("1");
-        personEntity.setCreatedFromIp("1.0");
-        personEntity.setVersion(1);
         this.repository.save(personEntity);
         personVo.setPersonId(personEntity.getId());
     }

@@ -19,5 +19,5 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = {"com.base"})
 @EnableTransactionManagement
 public class BaseConfiguration {
-    
+
 }

@@ -9,6 +9,7 @@ import lombok.*;
 public class UserVo {
 
     private String id;
+    private String userId;
     private String userName;
     private String firstName;
     private String lastName;

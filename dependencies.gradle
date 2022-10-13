@@ -66,5 +66,9 @@ dependencyManagement {
         dependency("commons-io:commons-io:2.8.0")
         dependency("org.keycloak:keycloak-spring-boot-starter:18.0.2")
 
+        dependency("org.hibernate:hibernate-core:5.4.9.Final")
+        dependency("org.hibernate:hibernate-entitymanager:5.4.9.Final")
+
+
     }
 }
