@@ -1,0 +1,50 @@
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
+      hibernate: ERROR
+
+server:
+  port: 8080
+  servlet:
+    context-path: /baseServices
+---
+keycloak:
+  enabled: true
+  bearer-only: true
+  auth-server-url: http://localhost:8083/auth
+  resource: BASE-WEB
+  realm: BASE-SSO-INTRANET
+  public-client: true
+  principal-attribute: preferred_username
+  #credentials:
+  #secret: ce515f8d-dbf7-438e-a8ef-71cc8d4c6f69
+  use-resource-role-mappings: false
+  allowAnyHostname: true
+  ssl-required: external
+---
+spring:
+  datasource:
+    jndi-name: jdbc/base
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        dialect: org.hibernate.dialect.MariaDB103Dialect
+
+springdoc:
+  springdoc:
+    packagesToScan: com.base.controller
+  api-docs:
+    path: /openapi
+  swagger-ui:
+    path: /swagger-ui
+    enabled: true
+    disable-swagger-default-url: true

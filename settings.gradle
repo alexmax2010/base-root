@@ -1,0 +1,12 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+rootProject.name = 'base-root'
+include 'base-client'
+include 'base-core'
+include 'base-ws'
+include 'base-vo'
+
+
